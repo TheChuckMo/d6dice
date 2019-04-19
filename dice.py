@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-import random
-from dataclasses import dataclass
 import numpy as np
 
 
@@ -36,11 +34,9 @@ class D6Dice(object):
     def _rand_role(self):
         _rand_roles: list = []
         for r in range(self._rand_count):
-            _rand_roles.append(random.randint(1,self.sides))
+            _rand_roles.append(np.random.randint(1,self.sides))
 
-        #return round(sum(_rand_roles) / len(_rand_roles))
-        return random.sample(_rand_roles, 1)[0]
-        return np.random.randint(1, self.sides, 100)
+        return np.random.randint(1, self.sides, 1)[0]
 
     def max(self):
         return self.count * self.sides
