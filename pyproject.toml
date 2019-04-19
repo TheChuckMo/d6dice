@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "d6dice"
+version = "0.1.0"
+description = "Simulated dice object"
+authors = ["Chuck Mo <chuck@d6engine.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+numpy = "^1.16"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
