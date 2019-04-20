@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "d6dice"
-version = "0.1.0"
+version = "0.1.2"
 description = "Simulated dice object"
 authors = ["Chuck Mo <chuck@d6engine.org>"]
 license = "GPL-3.0+"
