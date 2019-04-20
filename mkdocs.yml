@@ -1,0 +1,21 @@
+site_name: d6dice
+site_author: Chuck Mo
+copyright: GPLv3
+repo_url: https://gitlab.com/thechuckmo/d6dice
+google_analytics: [UA-138667896-1, d6engine.org]
+
+pages:
+   - Install: guides/install.md
+   - DevSetup: guides/devsetup.md
+   - Examples:   guides/examples.md
+
+
+theme: 
+   name: cluster
+
+extra:
+    prev_next_enabled: True
+    nav_right: ['Install', 'DevSetup', 'Examples']
+    hidden: ['Home']
+    fa_logo: 'fa-dice-one'
+
