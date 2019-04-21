@@ -43,6 +43,7 @@ def run_cmd(command):
     cmd = ' '.join(command)
     CliApp = D6Console()
     click.secho(f'command: {cmd}')
+    CliApp.preloop()
     CliApp.onecmd(cmd)
 
 @cli.command('shell')
