@@ -1,71 +1,51 @@
 
-from cement import App, CaughtSignal, Controller, ex, get_version
+from .dice import D6Dice
+import cmd
+import click
 
-VERSION = (0, 0, 1, 'alpha', 0)
+class D6Console(cmd.Cmd):
+    intro = 'Dice console'
+    prompt = '<dice> '
+    dice: D6Dice
 
-VERSION_BANNER = """
-console v%s
-""" % get_version()
+    def preloop(self):
+        self.dice = D6Dice()
 
+    def postloop(self):
+        print(f'Dice rolls: {self.dice.rolls}')
 
-class Base(Controller):
-    class Meta:
-        label = 'base'
+    def do_set(self, dice: str):
+        self.dice = D6Dice(dice)
 
-        arguments = [
-            ### add a version banner
-            ( [ '-v', '--version' ],
-              { 'action'  : 'version',
-                'version' : VERSION_BANNER } ),
-        ]
+    def do_show(self, arg):
+        print(f'Dice: {self.dice}\nDice rolls: {self.dice.rolls}')
 
+    def do_roll(self, dice: str):
+        if dice:
+            self.dice = D6Dice(dice)
 
-    def _default(self):
-        """Default action if no sub-command is passed."""
+        print(f'{self.dice.roll()}')
 
-        self.app.args.print_help()
+    def do_exit(self, arg):
+        return True
 
-
-    @ex(
-        help='example sub command1',
-        arguments=[
-            ### add a sample foo option under subcommand namespace
-            ( [ '-f', '--foo' ],
-              { 'help' : 'notorious foo option',
-                'action'  : 'store',
-                'dest' : 'foo' } ),
-        ],
-    )
-    def command1(self):
-        """Example sub-command."""
-
-        print('Inside Base.command1')
-
-        ### do something with arguments
-        if self.app.pargs.foo is not None:
-            print('Foo Argument > %s' % self.app.pargs.foo)
+    def emptyline(self):
+        pass
 
 
-class MyApp(App):
+@click.group('dice')
+def cli():
+    pass
 
-    class Meta:
-        # application label
-        label = 'console'
+@cli.command('run')
+@click.argument('command', nargs=-1, type=click.STRING)
+def run_cmd(command):
+    cmd = ' '.join(command)
+    CliApp = D6Console()
+    click.secho(f'command: {cmd}')
+    CliApp.onecmd(cmd)
 
-        # register handlers
-        handlers = [
-            Base
-        ]
-
-        # call sys.exit() on close
-        close_on_exit = True
-
-
-def d6dice_cli():
-    with MyApp() as app:
-        try:
-            app.run()
-        except CaughtSignal as e:
-            # Default Cement signals are SIGINT and SIGTERM, exit 0 (non-error)
-            print('\n%s' % e)
-            app.exit_code = 0
+@cli.command('shell')
+def run_shell():
+    CliApp = D6Console()
+    CliApp.cmdloop()

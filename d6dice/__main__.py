@@ -1,3 +1,3 @@
-from .console import d6dice_cli
+from .console import cli
 
-d6dice_cli()
+cli()

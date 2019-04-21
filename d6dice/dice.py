@@ -1,10 +1,10 @@
 
 import numpy as np
-from typing import Pattern, NewType, Optional, Callable, List
+from typing import Pattern, Any, List
 import re
 
 dice_pattern = re.compile(r'^(?P<count>\d+)[d/D](?P<sides>\d+)$')
-#Tdice = NewType('Tdice', dice_pattern[str])
+
 
 def base_roller(count: int, sides: int) -> List[int]:
     _roles = []
@@ -24,7 +24,7 @@ class D6Dice(object):
     count: int
     sides: int
     _dice_pattern = dice_pattern
-    _roller: Callable
+    _roller: Any
     _rolls: List 
 
     def __init__(self, dice: str = '1d6'):
@@ -47,7 +47,6 @@ class D6Dice(object):
         rolls = [f'{self.__str__()}']
         rolls.extend(self._roller(self.count, self.sides))
         self._rolls.append(rolls)
-        #rolls.pop(0)
         return rolls[1:]
 
     def set_roller(self, roller):
