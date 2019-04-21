@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "d6dice"
-version = "0.1.2"
+version = "0.1.6"
 description = "Simulated dice object"
 authors = ["Chuck Mo <chuck@d6engine.org>"]
 license = "GPL-3.0+"
@@ -16,6 +16,7 @@ keywords = ['dice', 'd6engine', 'opend6']
 python = "^3.7"
 numpy = "^1.16"
 click = "^7.0"
+cement = "^3.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.4"
@@ -23,7 +24,7 @@ mkdocs = "^1.0"
 mkdocs-cluster = "^0.0.9"
 
 [tool.poetry.scripts]
-d6dice = 'd6dice:main'
+d6dice = 'd6dice.main:cli'
 
 [build-system]
 requires = ["poetry>=0.12"]

@@ -1,6 +1,16 @@
-#!/usr/bin/env python3
 
 import numpy as np
+from typing import Pattern, NewType, Optional, Callable, List
+import re
+
+dice_pattern = re.compile(r'^(?P<count>\d+)[d/D](?P<sides>\d+)$')
+#Tdice = NewType('Tdice', dice_pattern[str])
+
+def base_roller(count: int, sides: int) -> List[int]:
+    _roles = []
+    for role in range(count):
+        _roles.extend(np.random.randint(1, sides+1, 1))
+    return _roles
 
 
 class D6Dice(object):
@@ -8,15 +18,24 @@ class D6Dice(object):
 
     Attributes
     ----------
-    count: int 
-    sides: int = 6
+    dice: str with Pattern[ count d sides ] 
 
     """
-    _rand_count: int = 100 
+    count: int
+    sides: int
+    _dice_pattern = dice_pattern
+    _roller: Callable
+    _rolls: List 
 
-    def __init__(self, count: int, sides: int = 6):
-        self.count = count
-        self.sides = sides
+    def __init__(self, dice: str = '1d6'):
+        self.dice = self._dice_pattern.match(dice)
+
+        self.count: int = int(self.dice.group('count'))
+
+        self.sides: int = int(self.dice.group('sides'))
+
+        self._roller = base_roller
+        self._rolls = []
 
     def __repr__(self):
         return f'{self.__class__.__name__}(count={self.count}, sides={self.sides})'
@@ -24,28 +43,24 @@ class D6Dice(object):
     def __str__(self):
         return f'{self.count}d{self.sides}'
 
-    def role(self):
-        roles = []
-        for i in range(self.count):
-            roles.append(self._rand_role())
+    def roll(self):
+        rolls = [f'{self.__str__()}']
+        rolls.extend(self._roller(self.count, self.sides))
+        self._rolls.append(rolls)
+        #rolls.pop(0)
+        return rolls[1:]
 
-        return roles
+    def set_roller(self, roller):
+        setattr(self, '_roller', roller)
 
-    def _rand_role(self):
-        _rand_roles: list = []
-        for r in range(self._rand_count):
-            _rand_roles.append(np.random.randint(1,self.sides))
+    #def _roller(self, sides: int):
+    #    return np.random.randint(1, sides+1, 1)[0]
 
-        return np.random.randint(1, self.sides, 1)[0]
+    @property
+    def rolls(self):
+        return self._rolls
 
+    @property
     def max(self):
         return self.count * self.sides
-
-
-die = D6Dice(3, 6)
-print(f'Dice: {die}')
-print(f'Role: {die.role()}')
-print(f'Max: {die.max()}')
-print(f'{type(die)}')
-
 
