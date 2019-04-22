@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "d6dice"
-version = "0.2.1"
+version = "0.2.2"
 description = "Simulated dice object"
 authors = ["Chuck Mo <chuck@d6engine.org>"]
 license = "GPL-3.0+"
@@ -8,9 +8,10 @@ license = "GPL-3.0+"
 readme = 'README.md'  
 
 repository = "https://gitlab.com/thechuckmo/d6dice"
-homepage = "https://d6engine.org"
+homepage = "https://www.d6engine.org"
+documentation = "https://d6dice.d6engine.org"
 
-keywords = ['dice', 'd6engine', 'opend6']
+keywords = ['dice', 'd6engine', 'opend6', 'd6']
 
 [tool.poetry.dependencies]
 python = "^3.7"
