@@ -7,57 +7,26 @@ Python dice object:
 
 The d6dice project was created to be used with the d6Engine and OpenD6 games. 
 
-## Install - REQUIRES Python3
+## Quick Start
 
-python3 -m pip install --user d6dice
+d6dice requires Python 3.5 or greater. It should run on any OS, but not verified.
 
-## example - console
+1. Install python 3.7+ [Python Downloads](https://www.python.org/downloads/)
+    - [Python3 Installation & Setup Guide](https://realpython.com/installing-python/)
+    - DETAILS: [Using Python on Windows](https://docs.python.org/3/using/windows.html)
+2. Install d6dice as user
+    - `python3 -m pip install --user d6dice`
 
-Examples using the console interface.
 
-_Roll the dice_
-
-```pythonstub
-> dice run roll 3d18
-command: roll 3d18
-[10, 1, 1]
+```bash
+    > python3 -m pip install --user d6dice
+    Looking in indexes: https://pypi.org/simple, https://uxtools.ohsu.edu:6868/simple
+    Collecting d6dice
+      Downloading https://files.pythonhosted.org/packages/42/72/b35a5a1277e330b86f32c02d840789f5724f36a54c6c6220216fece7e1e2/d6dice-0.2.2-py3-none-any.whl
+    Requirement already satisfied: click<8.0,>=7.0 in ./Library/Python/3.7/lib/python/site-packages (from d6dice) (7.0)
+    Collecting numpy<2.0,>=1.16 (from d6dice)
+      Downloading https://files.pythonhosted.org/packages/43/6e/71a3af8680a159a141fab5b4d19988111a09c02ffbfdeb42175cca0fa341/numpy-1.16.3-cp37-cp37m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl (13.9MB)
+        100% |████████████████████████████████| 13.9MB 1.8MB/s
+    Installing collected packages: numpy, d6dice
+    Successfully installed d6dice-0.2.2 numpy-1.16.3
 ```
-
-_Multiple Rolls_
-
-```pythonstub
-> dice shell
-Dice console
-<dice> set 4d6
-<dice> roll
-[5, 2, 1, 6]
-<dice> roll
-[3, 6, 5, 1]
-<dice> roll
-[6, 3, 4, 2]
-<dice> roll
-[5, 1, 5, 1]
-<dice> exit
-Dice rolls: [['4d6', 5, 2, 1, 6], ['4d6', 3, 6, 5, 1], ['4d6', 6, 3, 4, 2], ['4d6', 5, 1, 5, 1]]
-```
-
-## example - object
-
-Example d6dice code
-
-```python
-from d6dice.dice import D6Dice
-dice = D6Dice('3d6')
-dice.dice
-<re.Match object; span=(0, 3), match='3d6'>
-dice.count
->3
-dice.sides
->6
-dice.roll()
-[4, 5, 1]
-dice.rolls
-[['3d6', 1, 2, 3], ['3d6', 4, 5, 1]]
-```
-
-
