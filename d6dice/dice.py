@@ -5,7 +5,6 @@ import re
 
 dice_pattern = re.compile(r'^(?P<count>\d+)[d/D](?P<sides>\d+)$')
 
-
 def base_roller(count: int, sides: int) -> List[int]:
     _roles = []
     for role in range(count):
@@ -18,14 +17,14 @@ class D6Dice(object):
 
     Attributes
     ----------
-    dice: str with Pattern[ count d sides ] 
+    dice: str with Pattern[ count d sides ]
 
     """
     count: int
     sides: int
     _dice_pattern = dice_pattern
     _roller: Any
-    _rolls: List 
+    _rolls: List
 
     def __init__(self, dice: str = '1d6'):
         self.dice = self._dice_pattern.match(dice)
