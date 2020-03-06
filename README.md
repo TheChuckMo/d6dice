@@ -14,3 +14,5 @@ source vpy/bin/activate
 pip install d6dice
   
 ```
+
+ - signed commits
